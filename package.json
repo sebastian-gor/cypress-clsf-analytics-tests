@@ -1,0 +1,18 @@
+{
+  "author": "",
+  "license": "ISC",
+  "name": "",
+  "scripts": {
+    "test:vte": "CYPRESS_ENV=vte cypress run",
+    "test:sandbox": "CYPRESS_ENV=sandbox cypress run",
+    "test:prod": "CYPRESS_ENV=prod cypress run"
+  },
+  "dependencies": {
+    "@types/underscore": "^1.9.4",
+    "cypress-terminal-report": "^3.4.2",
+    "cypress": "^9.1.0",
+    "@cypress/schema-tools": "^4.7.9",
+    "json-schema": "^0.4.0",
+    "typescript": "^3.7.5"
+  }
+}
