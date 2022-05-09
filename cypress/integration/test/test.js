@@ -4,8 +4,8 @@ import { cypressHelper } from "../../support/cypressHelper";
 
 describe('test', () => {
   before(() => {
-      cy.login(cypressHelper.variables.token).then((resp) => {
-          cypressHelper.variables.token = cypressHelper.variables.token?cypressHelper.variables.token:resp?.body?.access_token
+      cy.task('getToken').then(value => {
+          cy.login(value)
       });
   });
 
@@ -16,8 +16,15 @@ describe('test', () => {
           .then((resp) => {
               expect(resp.status).to.eq(200)
               cypressHelper.variables.consulHost = resp.body.Address
+              // cy.task('getId')
+              cy.log(resp.body[0].Address)
+              cy.task('setId', resp.body[0].Address)
           })
           // .its('body')
           // .then(api.assertSchema('test', '1.0.0'))
   })
+
+    it('test test', () => {
+        cy.task('getId').toString()
+    })
 })

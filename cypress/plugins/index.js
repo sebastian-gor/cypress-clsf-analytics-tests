@@ -20,6 +20,33 @@ module.exports = (on, config) => {
         defaultTrimLength: 500,
         routeTrimLength: 500
     });
+
+    token = null
+
+    on('task', {
+        setToken: (vale) => {
+            return (token = vale);
+        },
+
+        getToken: () => {
+            return token;
+        },
+
+        setId: (val) => {
+            return (id = val);
+        },
+
+        getId: () => {
+
+            return id;
+        },
+
+        teest: async () => {
+
+            id = null
+            return id;
+        }
+    })
     // `on` is used to hook into various events Cypress emits
     // `config` is the resolved Cypress config
     return cypressConfigResolver();

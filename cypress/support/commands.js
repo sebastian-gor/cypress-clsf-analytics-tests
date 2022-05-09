@@ -41,7 +41,9 @@ Cypress.Commands.add('login', (token, username = 'user', password = 'password') 
                     username: Cypress.env(username),
                     password: Cypress.env(password),
                 }
-            })
+            }).then((resp) => {
+                cy.task("setToken", resp?.body?.access_token)
+            });
         } else {
             cy.log("Token is: " + token)
         }
