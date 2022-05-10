@@ -4,9 +4,7 @@ import { cypressHelper } from "../../support/cypressHelper";
 
 describe('test', () => {
   before(() => {
-      cy.task('getToken').then(value => {
-          cy.login(value)
-      });
+          cy.login()
   });
 
   it('test test', () => {

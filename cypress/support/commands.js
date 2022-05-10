@@ -25,28 +25,30 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
 //
-Cypress.Commands.add('login', (token, username = 'user', password = 'password') => {
+Cypress.Commands.add('login', (username = 'user', password = 'password') => {
 
     function login () {
-        if (!token) {
-            return cy.request({
-                method: 'POST',
-                url: (Cypress.env('url') + '/auth/oauth/token'),
-                form: true,
-                headers: {
-                    'Authorization': "Basic " + Cypress.env('authorizationHeader'),
-                },
-                body: {
-                    grant_type: 'password',
-                    username: Cypress.env(username),
-                    password: Cypress.env(password),
-                }
-            }).then((resp) => {
-                cy.task("setToken", resp?.body?.access_token)
-            });
-        } else {
-            cy.log("Token is: " + token)
-        }
+        cy.task('getToken').then(token => {
+            if (!token) {
+                return cy.request({
+                    method: 'POST',
+                    url: (Cypress.env('url') + '/auth/oauth/token'),
+                    form: true,
+                    headers: {
+                        'Authorization': "Basic " + Cypress.env('authorizationHeader'),
+                    },
+                    body: {
+                        grant_type: 'password',
+                        username: Cypress.env(username),
+                        password: Cypress.env(password),
+                    }
+                }).then((resp) => {
+                    cy.task("setToken", resp?.body?.access_token)
+                });
+            } else {
+                cy.log("Token is: " + token)
+            }
+        });
     }
     return login();
 })
