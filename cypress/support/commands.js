@@ -98,14 +98,23 @@ Cypress.Commands.add('requestMethodWithRetry', ({token, method, url, body = unde
 
 Cypress.Commands.add('requestToConsul', ({service}) => {
 
-    return cy.request({
-        method: "GET",
-        url: "http://consul-"
-            +Cypress.env('consulEnvironment')+
-            ".qxlint/v1/catalog/service/"
-            +service+
-            "?dc=dev-dc4&filter=ServiceTags%20contains%20vte92",
-    })
+    function requestToConsul () {
+        cy.task('getHost').then(host => {
+            if (!host) {
+            return cy.request({
+                method: "GET",
+                url: "http://consul-"
+                    +Cypress.env('consulEnvironment')+
+                    ".qxlint/v1/catalog/service/"+service+"?dc="+Cypress.env('consulDc')+"&filter="+Cypress.env('consulFilter'),
+            }).then((resp) => {
+                cy.task('setHost', resp?.body[0]?.Address+"+'"+service+"'")
+            });
+            } else {
+                cy.log("Service "+service+" host: " + host)
+            }
+        });
+    }
+    return requestToConsul();
 });
 
 

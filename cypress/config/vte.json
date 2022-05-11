@@ -1,6 +1,8 @@
 {
     "env": {
         "consulEnvironment": "dev",
+        "consulFilter": "ServiceTags+contains+vte92",
+        "consulDc": "dev-dc4",
         "environment": "vte",
         "url": "https://allegro.pl.vte92.vte.local",
         "authorizationHeader": "b3JkZXIuZGVsdGE6TTJacnh0S0JuM0pIWW1XcWlmdHFydXVRcjdkcTdsNVNxMzhxeGwyUmFzTTdJN01YOWRaSmpPVVR4SHJGUUFFcQ==",

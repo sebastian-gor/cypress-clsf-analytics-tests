@@ -21,30 +21,24 @@ module.exports = (on, config) => {
         routeTrimLength: 500
     });
 
-    token = null
+    let token = null
+    let host = null
 
     on('task', {
-        setToken: (vale) => {
-            return (token = vale);
+        setToken: (val) => {
+            return (token = val);
         },
 
         getToken: () => {
             return token;
         },
 
-        setId: (val) => {
-            return (id = val);
+        setHost: (val) => {
+            return (host = val);
         },
 
-        getId: () => {
-
-            return id;
-        },
-
-        teest: async () => {
-
-            id = null
-            return id;
+        getHost: () => {
+            return host;
         }
     })
     // `on` is used to hook into various events Cypress emits

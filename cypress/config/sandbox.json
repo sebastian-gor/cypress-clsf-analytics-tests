@@ -1,6 +1,8 @@
 {
     "env": {
         "consulEnvironment": "test",
+        "consulFilter": "ServiceTags+is+not+empty",
+        "consulDc": "",
         "environment": "sandbox",
         "url": "https://allegro.pl.allegrosandbox.pl",
         "authorizationHeader": "b3JkZXIuZGVsdGE6TTJacnh0S0JuM0pIWW1XcWlmdHFydXVRcjdkcTdsNVNxMzhxeGwyUmFzTTdJN01YOWRaSmpPVVR4SHJGUUFFcQ==",
