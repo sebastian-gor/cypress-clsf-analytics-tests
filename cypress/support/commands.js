@@ -100,7 +100,8 @@ Cypress.Commands.add('requestToConsul', ({service}) => {
 
     function requestToConsul () {
         cy.task('getHost').then(host => {
-            if (!host.service) {
+            let findService = host.find(x => x.service === service)?.service
+            if (findService !== service) {
             return cy.request({
                 method: "GET",
                 url: "http://consul-"
@@ -110,7 +111,7 @@ Cypress.Commands.add('requestToConsul', ({service}) => {
                 cy.task('setHost', {service:service, host:resp?.body[0]?.Address})
             });
             } else {
-                cy.log("Service "+service+" host: " + host.host)
+                cy.log("Service "+service+" host: " + host.find(x => x.service === service).host)
             }
         });
     }

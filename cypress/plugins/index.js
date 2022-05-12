@@ -34,7 +34,7 @@ module.exports = (on, config) => {
         },
 
         setHost: (val) => {
-            host = val
+            host.push(val)
             return host;
         },
 
