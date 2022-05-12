@@ -100,17 +100,17 @@ Cypress.Commands.add('requestToConsul', ({service}) => {
 
     function requestToConsul () {
         cy.task('getHost').then(host => {
-            if (!host) {
+            if (!host.service) {
             return cy.request({
                 method: "GET",
                 url: "http://consul-"
                     +Cypress.env('consulEnvironment')+
                     ".qxlint/v1/catalog/service/"+service+"?dc="+Cypress.env('consulDc')+"&filter="+Cypress.env('consulFilter'),
             }).then((resp) => {
-                cy.task('setHost', resp?.body[0]?.Address+"+'"+service+"'")
+                cy.task('setHost', {service:service, host:resp?.body[0]?.Address})
             });
             } else {
-                cy.log("Service "+service+" host: " + host)
+                cy.log("Service "+service+" host: " + host.host)
             }
         });
     }

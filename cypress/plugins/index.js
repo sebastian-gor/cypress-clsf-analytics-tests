@@ -22,7 +22,7 @@ module.exports = (on, config) => {
     });
 
     let token = null
-    let host = null
+    let host = []
 
     on('task', {
         setToken: (val) => {
@@ -34,7 +34,8 @@ module.exports = (on, config) => {
         },
 
         setHost: (val) => {
-            return (host = val);
+            host = val
+            return host;
         },
 
         getHost: () => {
